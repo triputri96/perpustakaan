@@ -32,7 +32,14 @@
                                     <a class="nav-link color-black" href="#koleksiku">Koleksiku</a>
                                 </li>
                                 <li class="nav-item col">
-                                    <a class="nav-link color-black" href="#">Log Out</a>
+                                    <a class="nav-link color-black" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                                            <path fill-rule="evenodd"
+                                                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                        </svg></a>
                                 </li>
                             </ul>
                         </div>
@@ -91,15 +98,14 @@
                 <div class="">
                     <h3>Astronomi</h3>
                 </div>
-                <div id="bookContainer" class="overflow-hidden">
-                    <!-- <div class="position-absolute"> -->
-                    <div id="imgContainer" class="p-3 d-flex align-items-center padding-left position-relative">
-                        <div id="imgContent" class="image-container">
-                            <a href="#" class="text-decoration">
+                <div id="bookContainer" class="position-relative overflow-hidden" style="height:350px;">
+                    <div id="imgContainer" class="pt-3 position-absolute d-flex">
+                        <div class="image-container book-padding">
+                            <a href=" #" class="text-decoration">
                                 <img class="book-size" src="../assets/image/bukusakti.jpg" alt="" />
                                 <div class="caption">
                                     <p class="font-size align-text">
-                                        <strong>Buku Sakti</strong>
+                                        <strong>Buku Sakti First</strong>
                                     </p>
                                 </div>
                             </a>
@@ -140,16 +146,26 @@
                                 <div class="caption">
                                     <p class="font-size align-text">
                                         <strong>Buku Sakti</strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#" class="text-decoration">
+                                <img class="book-size" src="../assets/image/bukusakti.jpg" alt="" />
+                                <div class="caption">
+                                    <p class="font-size align-text">
+                                        <strong>Buku Sakti Last</strong>
                                     </p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div>
-                        <button>Prev</button>
-                        <button onclick="getNextSlide()">Next</button>
-                    </div>
-                    <!-- </div> -->
+                </div>
+                <div>
+                    <button id="prevBtn" disabled onclick="getPrevSlide()">Prev</button>
+                    <button id="nextBtn" onclick="getNextSlide()">Next</button>
                 </div>
             </div>
         </div>
