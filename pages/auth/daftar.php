@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Login Form Design | CodeLab</title>
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <title>Daftar | Perpustakaan</title>
+    <link rel="stylesheet" href="../../dist/css/login.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper">
         <div class="title">
-            SIGN UP FORM
+            Daftar
         </div>
         <?php
         if (isset($_GET['pesan'])) {
@@ -23,14 +23,14 @@
         ?>
 
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Login Gagal!</strong>
+            <strong>Daftar Gagal!</strong>
             <?php echo $_GET['pesan']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php
         }
         ?>
-        <form action="" method="post">
+        <form action="../../app/Services/authService.php" method="post">
             <div class="field">
                 <input type="text" id="username" name="username" required>
                 <label for="username">Username</label>
@@ -40,24 +40,13 @@
                 <label for="password">Password</label>
             </div>
             <div class="field">
-                <input type="submit" value="Sign up" name="btnDaftar">
+                <input type="submit" value="Daftar" name="btnDaftar">
             </div>
             <div class="signup-link">
-                Tidak punya akun? <a href="#">Signup now</a>
+                Sudah punya akun? <a href="/pages/auth/login.php">Login sekarang</a>
             </div>
         </form>
     </div>
 </body>
 
 </html>
-<?php
-include 'koneksi.php';
-if (isset($_POST['btnDaftar'])) {
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $query = mysqli_query($konek, "INSERT INTO data_user VALUES('$username','$password')");
-    if ($query) {
-        echo "<script>alert('Sukses'); window.location.href='login.php'</script>";
-    }
-}
-?>

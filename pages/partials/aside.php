@@ -1,4 +1,3 @@
-<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="../../index3.html" class="brand-link">
@@ -32,17 +31,9 @@
         </li>
         <li class="nav-item">
           <a href="../admin/user.php" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              User
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../admin/pengunjung.php" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
-              Pengunjung
+              User
             </p>
           </a>
         </li>
@@ -56,7 +47,7 @@
         </li>
         <li class="nav-item">
           <a href="../admin/peminjaman.php" class="nav-link">
-          <i class="nav-icon far fa-calendar-alt"></i>
+            <i class="nav-icon far fa-calendar-alt"></i>
             <p>
               Peminjaman Buku
             </p>

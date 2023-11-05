@@ -7,7 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Perpustakaan</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-	<link rel="stylesheet" href="./dist/css/style.css" />
+	<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="../../dist/css/style.css" />
 </head>
 
 <body>
@@ -47,6 +48,7 @@
 			</div>
 		</nav>
 	</header>
+	<?php require('../../app/Services/userDashboard.php') ?>
 	<section id="home">
 		<div class="banner-img position-relative d-flex align-items-center">
 			<div class="d-flex col-5">
@@ -67,103 +69,75 @@
 			<div class="d-flex justify-content-evenly">
 				<div class="">
 					<a href="#astronomi" class="text-decoration-none text-dark">
-						<img src="./dist/img/astronomi.png" alt="" width="100" />
+						<img src="../../dist/img/astronomi.png" alt="" width="100" />
 						<p class="font-25">Astronomi</p>
 					</a>
 				</div>
 				<div class="">
 					<a href="#" class="text-decoration-none text-dark">
-						<img src="./dist/img/pendidikan.png" alt="" width="100" />
+						<img src="../../dist/img/pendidikan.png" alt="" width="100" />
 						<p class="font-25">Pendidikan</p>
 					</a>
 				</div>
 				<div class="">
 					<a href="fiksi" class="text-decoration-none text-dark">
-						<img src="./dist/img/fiksi.png" alt="" width="100" />
+						<img src="../../dist/img/fiksi.png" alt="" width="100" />
 						<p class="font-25">Fiksi</p>
 					</a>
 				</div>
 			</div>
 
-			<div class="astronomi">
-				<div class="p-5">
-					<div class="">
-						<h3>Astronomi</h3>
-					</div>
-					<div id="bookContainer" class="position-relative overflow-hidden" style="height:350px;">
-						<div id="imgContainer" class="pt-3 position-absolute d-flex">
-							<div class="image-container book-padding">
-								<a href=" #" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti First</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="image-container book-padding">
-								<a href="#" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="image-container book-padding">
-								<a href="#" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="image-container book-padding">
-								<a href="#" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-							<div class="image-container book-padding">
-								<a href="#" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-
-							<div class="image-container">
-								<a href="#" class="text-decoration-none text-dark">
-									<img class="book-size" src="./dist/img/bukusakti.jpg" alt="" />
-									<div class="caption">
-										<p class="font-size align-text">
-											<strong>Buku Sakti Last</strong>
-										</p>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div>
-						<button id="prevBtn" disabled onclick="getPrevSlide()">Prev</button>
-						<button id="nextBtn" onclick="getNextSlide()">Next</button>
+			<div class="p-5">
+				<div class="">
+					<h3>Daftar Buku</h3>
+				</div>
+				<div class="card">
+					<div class="card-body table-responsive p-0" style="height: 300px;">
+						<table class="table table-head-fixed text-nowrap">
+							<thead>
+								<tr>
+									<th class="col-1">#</th>
+									<th class="col-2">Judul</th>
+									<th class="col-4">Pengarang</th>
+									<th class="col-3">Genre</th>
+									<th class="col-2">Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($dataBuku as $key => $book) : ?>
+									<tr>
+										<td><?= $key + 1; ?></td>
+										<td><?= $book['judul']; ?></td>
+										<td><?= $book['pengarang']; ?></td>
+										<td><?= $book['genre']; ?></td>
+										<td>
+											<a type="submit" name="pinjamBuku" class="btn text-info" href="pinjamBuku.php?id=<?= $book['id'] ?>"><i class="fas fa-plus"></i></a>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
+
+				<!-- <div id="bookContainer" class="position-relative overflow-hidden" style="height:350px;">
+					<div id="imgContainer" class="pt-3 position-absolute d-flex">
+						<div class="container">
+								<a href="" class="text-decoration-none text-dark">
+									<img class="book-size" src="../../dist/img/bukusakti.jpg" alt="" />
+									<div class="caption">
+										<p class="font-size align-text">
+											<strong></strong>
+										</p>
+									</div>
+								</a>
+							</div>
+					</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
-	<script src="./dist/js/script.js"></script>
+	<script src="../../dist/js/script.js"></script>
 	<script>
 		window.addEventListener("scroll", function() {
 			var navbar = document.getElementById("navbar");
