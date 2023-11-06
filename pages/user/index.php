@@ -91,49 +91,28 @@
 				<div class="">
 					<h3>Daftar Buku</h3>
 				</div>
-				<div class="card">
-					<div class="card-body table-responsive p-0" style="height: 300px;">
-						<table class="table table-head-fixed text-nowrap">
-							<thead>
-								<tr>
-									<th class="col-1">#</th>
-									<th class="col-2">Judul</th>
-									<th class="col-4">Pengarang</th>
-									<th class="col-3">Genre</th>
-									<th class="col-2">Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($dataBuku as $key => $book) : ?>
-									<tr>
-										<td><?= $key + 1; ?></td>
-										<td><?= $book['judul']; ?></td>
-										<td><?= $book['pengarang']; ?></td>
-										<td><?= $book['genre']; ?></td>
-										<td>
-											<a type="submit" name="pinjamBuku" class="btn text-info" href="pinjamBuku.php?id=<?= $book['id'] ?>"><i class="fas fa-plus"></i></a>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
-				</div>
 
-				<!-- <div id="bookContainer" class="position-relative overflow-hidden" style="height:350px;">
-					<div id="imgContainer" class="pt-3 position-absolute d-flex">
-						<div class="container">
-								<a href="" class="text-decoration-none text-dark">
-									<img class="book-size" src="../../dist/img/bukusakti.jpg" alt="" />
+				<!--  -->
+
+				<div id="bookContainer" class="position-relative overflow-hidden d-flex">
+					<?php
+					$count = 0;
+					foreach ($dataBuku as $key => $book) :
+						$count++; ?>
+						<div id="imgContainer" class="pt-3">
+							<div class="container">
+								<a href="pinjamBuku.php?id=<?= $book['id'] ?>" class="text-decoration-none text-dark">
+									<img class="book-size" src="../../dist/img/bukusakti.jpg" alt="" width="150" />
 									<div class="caption">
 										<p class="font-size align-text">
-											<strong></strong>
+											<strong><?= $book['judul']; ?></strong>
 										</p>
 									</div>
 								</a>
 							</div>
-					</div>
-				</div> -->
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
 	</section>
