@@ -47,6 +47,7 @@ require('../../app/Services/user.php');
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 <?php
                 $query = "SELECT *FROM data_user";
                 $sql = mysqli_query($konek, $query);
@@ -56,6 +57,12 @@ require('../../app/Services/user.php');
                   <tr>
                     <td><?php echo $no; ?></td>
                     <td><?php echo $user['username']; ?></td>
+=======
+                <?php foreach ($dataUser as $key => $user) : ?>
+                  <tr>
+                    <td><?= $key + 1; ?></td>
+                    <td><?= $user['username']; ?></td>
+>>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
                     <td>
                       <form method="post" action="../../app/Services/user.php?id=<?= $user['id']; ?>">
                         <!-- <button type="submit" name="edit" class="btn text-info"><i class="fas fa-edit"></i></button> -->
@@ -63,10 +70,14 @@ require('../../app/Services/user.php');
                       </form>
                     </td>
                   </tr>
+<<<<<<< HEAD
                 <?php
                   $no++;
                 }
                 ?>
+=======
+                <?php endforeach; ?>
+>>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
               </tbody>
             </table>
           </div>

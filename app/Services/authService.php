@@ -21,7 +21,11 @@ if (isset($_POST['btnLoginAdmin']) || isset($_POST['btnLoginUser'])) {
             if ($data['level'] == 'admin') {
                 header('location:../../pages/admin/dashboard.php');
             } else if ($data['level'] == 'user') {
+<<<<<<< HEAD
                 header('location:../../pages/user/index.php');
+=======
+                header('location:../../index.php');
+>>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
             }
         } else {
             //password salah            

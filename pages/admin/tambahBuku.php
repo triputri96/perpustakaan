@@ -2,7 +2,10 @@
 include('../partials/head.php');
 require('../../app/Services/buku.php');
 ?>
+<<<<<<< HEAD
 <link rel="stylesheet" href="../../dist/css/style.css">
+=======
+>>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -51,7 +54,11 @@ require('../../app/Services/buku.php');
                       <label for="genre">Genre</label>
                       <input type="genre" name="genre" class="form-control" id="genre">
                     </div>
+<<<<<<< HEAD
                     <div class="form-group">
+=======
+                     <div class="form-group">
+>>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
                       <label for="deskripsi">Deskripsi</label>
                       <input type="deskripsi" name="deskripsi" class="form-control" id="deskripsi">
                     </div>
