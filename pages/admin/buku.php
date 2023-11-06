@@ -41,20 +41,15 @@ require('../../app/Services/buku.php');
             <table class="table table-head-fixed text-nowrap">
               <thead>
                 <tr>
-<<<<<<< HEAD
-                  <th class="col-1">NO</th>
-=======
-                  <th class="col-1">#</th>
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
+                  <th class="col-1">No</th>
                   <th class="col-2">Judul</th>
-                  <th class="col-3">Pengarang</th>
+                  <th class="col-2">Pengarang</th>
                   <th class="col-2">Genre</th>
-                  <th class="col-5">Deskripsi</th>
+                  <th class="col-3">Deskripsi</th>
                   <th class="col-2">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-<<<<<<< HEAD
                 <?php
                 $query = "SELECT *FROM data_buku";
                 $sql = mysqli_query($konek, $query);
@@ -69,28 +64,13 @@ require('../../app/Services/buku.php');
                     <td><?php echo $book['deskripsi']; ?></td>
                     <td class="d-flex">
                       <a type="submit" name="editBuku" class="btn text-info" href="tambahBuku.php?id=<?= $book['id'] ?>"><i class="fas fa-edit"></i></a>
-=======
-                <?php foreach ($dataBuku as $key => $book) : ?>
-                  <tr>
-                    <td><?= $key + 1; ?></td>
-                    <td><?= $book['judul']; ?></td>
-                    <td><?= $book['pengarang']; ?></td>
-                    <td><?= $book['genre']; ?></td>
-                    <td><?= $book['deskripsi']; ?></td>
-                    <td class="d-flex">
-                      <a type="submit" name="editBuku" class="btn text-info" href="tambahBuku.php?id=<?= $book['id']?>"><i class="fas fa-edit"></i></a>
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
                       <form method="post" action="../../app/Services/buku.php?id=<?= $book['id']; ?>">
                         <!-- <button type="submit" name="editBuku" class="btn text-info"><i class="fas fa-edit"></i></button> -->
                         <button type="submit" name="deleteBuku" class="btn text-danger"><i class="fas fa-trash"></i></button>
                       </form>
                     </td>
                   </tr>
-<<<<<<< HEAD
                 <?php } ?>
-=======
-                <?php endforeach; ?>
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
               </tbody>
             </table>
           </div>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -8,8 +7,6 @@ if (!isset($_SESSION['username'])) {
 
 include '../../config/koneksi.php';
 ?>
-=======
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
 <html lang="en">
 
 <head>

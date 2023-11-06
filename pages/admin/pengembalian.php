@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php include('../partials/head.php'); ?>
 
 <body class="hold-transition sidebar-mini">
@@ -21,7 +19,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-header">
-              <h3 class="card-title">Fixed Header Table</h3>
+              <h3 class="card-title">Data Pengembalian</h3>
 
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -40,101 +38,40 @@
             <table class="table table-head-fixed text-nowrap">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>User</th>
-<<<<<<< HEAD
-                  <th>Status</th>
-                  <th>Date</th>
+                  <th class="col-1">No</th>
+                  <th class="col-2">Judul Buku</th>
+                  <th class="col-3">Peminjam</th>
+                  <th class="col-4">Tanggal Pinjam</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $query = "SELECT *FROM data_pengembalian";
+                $query = "SELECT data_peminjaman.id, data_user.username, data_peminjaman.tgl_pinjam, data_buku.judul 
+                  FROM data_peminjaman 
+                  INNER JOIN data_buku 
+                  ON data_peminjaman.buku_id = data_buku.id 
+                  INNER JOIN data_user
+                  ON data_peminjaman.user_id = data_user.id
+                  WHERE data_peminjaman.is_returned = '1'";
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
                 while ($pinjam = mysqli_fetch_array($sql)) {
                 ?>
                   <tr>
                     <td><?php echo $no; ?></td>
-                    <td><?php echo $pinjam['id']; ?></td>
-                    <td><?php echo $pinjam['user']; ?></td>
-                    <td><?php echo $pinjam['status']; ?></td>
-                    <td><?php echo $pinjam['Date']; ?></td>
-
+                    <td><?php echo $pinjam['judul']; ?></td>
+                    <td><?php echo $pinjam['username']; ?></td>
+                    <td><?php echo $pinjam['tgl_pinjam']; ?></td>
                   <tr>
                   <?php
                   $no++;
                 }
                   ?>
-=======
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Reason</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-success">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>219</td>
-                  <td>Alexander Pierce</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-warning">Pending</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>657</td>
-                  <td>Bob Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-primary">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>175</td>
-                  <td>Mike Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-danger">Denied</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>134</td>
-                  <td>Jim Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-success">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>494</td>
-                  <td>Victoria Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-warning">Pending</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>832</td>
-                  <td>Michael Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-primary">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>982</td>
-                  <td>Rocky Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="tag tag-danger">Denied</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
               </tbody>
             </table>
           </div>
           <!-- /.card-body -->
-          <div class="card-footer clearfix">
+          <!-- <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
               <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
               <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -142,7 +79,7 @@
               <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
             </ul>
-          </div>
+          </div> -->
           <!-- /.card-footer-->
         </div>
         <!-- /.card -->

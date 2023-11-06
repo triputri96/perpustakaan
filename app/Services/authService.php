@@ -2,14 +2,11 @@
 include('../../config/koneksi.php');
 if (isset($_POST['btnLoginAdmin']) || isset($_POST['btnLoginUser'])) {
     $username = $_POST['username'];
+    $qlog = mysqli_query($konek, "SELECT * FROM data_user WHERE username='$username'");
+    $logged = mysqli_fetch_array($qlog);
+    $level = $logged['level'];
     $p = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    echo $p;
     $password = $_POST['password'];
-    if (isset($_POST['btnLoginAdmin'])) {
-        $level = 'admin';
-    } else if (isset($_POST['btnLoginUser'])) {
-        $level = 'user';
-    }
 
     $query = mysqli_query($konek, "SELECT * FROM data_user WHERE username='$username' AND level='$level'");
     $data = mysqli_fetch_array($query);
@@ -21,11 +18,7 @@ if (isset($_POST['btnLoginAdmin']) || isset($_POST['btnLoginUser'])) {
             if ($data['level'] == 'admin') {
                 header('location:../../pages/admin/dashboard.php');
             } else if ($data['level'] == 'user') {
-<<<<<<< HEAD
-                header('location:../../pages/user/index.php');
-=======
-                header('location:../../index.php');
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
+                header('location:../../pages/user');
             }
         } else {
             //password salah            
@@ -47,14 +40,14 @@ if (isset($_POST['btnLoginAdmin']) || isset($_POST['btnLoginUser'])) {
 
 if (isset($_POST['btnDaftar'])) {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $p = password_hash($_POST['password'], PASSWORD_BCRYPT);
     if ($_POST['level'] == "") {
         $level = 'user';
     } else {
         $level = $_POST['level'];
     }
 
-    $query = mysqli_query($konek, "INSERT INTO data_user (username, password, level) VALUES ('$username', '$password', '$level')");
+    $query = mysqli_query($konek, "INSERT INTO data_user (username, password, level) VALUES ('$username', '$p', '$level')");
     if ($query) {
         if ($_POST['level'] == "") {
             echo "<script>alert('Sukses'); window.location.href='../../pages/auth/login.php'</script>";

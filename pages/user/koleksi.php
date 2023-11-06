@@ -53,45 +53,53 @@
     <div style=" height: 100vh;padding: 100px 100px;">
       <div class="card">
         <div class="card-body">
-          <?php
-          include '../../config/koneksi.php';
-          $id_buku = $_GET['idBuku'];
-          $query = mysqli_query($konek, "SELECT * FROM data_buku WHERE id='$id_buku'");
-          $dataBuku = mysqli_fetch_array($query);
-          ?>
-          <form id="quickForm" action="<?php if (isset($_GET['idBuku'])) {
-                                          echo "../../app/Services/userDashboard.php?idBuku=" . $_GET['idBuku'];
-                                        } ?>" method="post">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../dist/img/bukusakti.jpg" alt="" width="300">
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <button type="submit" name="pinjamBuku" class="mt-2 btn btn-info">Pinjam
-                      Buku</button>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div>
-                    <div class="mb-3">
-                      <h1><?php echo $dataBuku['judul']; ?></h1>
-                    </div>
-                    <div class="mb-2">
-                      <h5>Deskripsi</h5>
-                      <p><?php echo $dataBuku['deskripsi']; ?></p>
-                    </div>
-                    <div>
-                      <h5>Pengarang</h5>
-                      <p><?php echo $dataBuku['pengarang']; ?></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.card-body -->
-          </form>
+          <div class="card-body table-responsive p-0" style="height: 300px;">
+            <table class="table table-head-fixed text-nowrap">
+              <thead>
+                <tr>
+                  <th class="col-1">No</th>
+                  <th class="col-2">Judul Buku</th>
+                  <th class="col-4">Tanggal Pinjam</th>
+                  <th class="col-3">Status</th>
+                  <th class="col-2">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $query = "SELECT data_peminjaman.id, data_peminjaman.is_returned, data_peminjaman.tgl_pinjam, data_buku.judul 
+                  FROM data_peminjaman 
+                  INNER JOIN data_buku 
+                  ON data_peminjaman.buku_id = data_buku.id";
+                  // INNER JOIN data_user
+                  // ON data_peminjaman.user_id = data_user.id";
+                $sql = mysqli_query($konek, $query);
+                $no = 1;
+                while ($pinjam = mysqli_fetch_array($sql)) {
+                ?>
+                  <tr>
+                    <td><?php echo $no; ?></td>
+                    <td><?php echo $pinjam['judul']; ?></td>
+                    <td><?php echo $pinjam['tgl_pinjam']; ?></td>
+                    <td><?php if ($pinjam['is_returned'] == 1) {
+                          echo 'Dikembalikan';
+                        } else {
+                          echo 'Belum dikembalikan';
+                        } ?></td>
+                    <td>
+                      <form method="post" action="../../app/Services/userDashboard.php?id=<?= $pinjam['id']; ?>">
+                        <!-- TODO: ganti ikon nnti -->
+                        <button type="submit" name="btnKembalikan" class="btn text-danger"><i class="fas fa-trash"></i></button>
+                      </form>
+                    </td>
+                  </tr>
+                <?php
+                  $no++;
+                }
+                ?>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
       </div>
     </div>

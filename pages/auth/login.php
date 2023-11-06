@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<?php
-session_start();
-if (isset($_SESSION['nis'])) {
-	header('location:index.php');
-}
-?>
 <html lang="en" dir="ltr">
 
 <head>
@@ -48,11 +42,7 @@ if (isset($_SESSION['nis'])) {
 				<input type="submit" value="Login" name="btnLoginUser">
 			</div>
 			<div class="signup-link">
-<<<<<<< HEAD
-				Tidak punya akun? <a href="../auth/daftar.php">daftar sekarang</a>
-=======
 				Tidak punya akun? <a href="/pages/auth/daftar.php">daftar sekarang</a>
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
 			</div>
 		</form>
 	</div>

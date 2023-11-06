@@ -7,16 +7,12 @@ body {
   background-color: #f8fcfb;
 }
 .navbar {
-<<<<<<< HEAD
-  transition: background-color 0.5s, transform 0.5s;
-=======
   transition:
     background-color 0.5s,
     transform 0.5s;
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f
   padding: 25px 100px;
 }
-.book-section {
+.book-section, .koleksi-section {
   padding: 100px 0;
 }
 .banner-img {
@@ -30,13 +26,7 @@ body {
 }
 
 /* TODO: ini kelasnya */
-<<<<<<< HEAD
 .card-primary:not(.card-outline) > .card-header {
   background-color: #97f9e3;
   color: black;
 }
-=======
-/* .card-form{
-  background-color:
-} */
->>>>>>> fc048b6512fc8e401459214d95d7078120da1f1f

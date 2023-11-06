@@ -29,7 +29,6 @@ if (isset($_POST['tambahBuku'])) {
     $deskripsi = $_POST['deskripsi'];
 
     $query = mysqli_query($konek, "INSERT INTO data_buku (judul, pengarang, genre, deskripsi) VALUES ('$judul', '$pengarang', '$genre', '$deskripsi')");
-
     if ($query) {
       echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
     }
