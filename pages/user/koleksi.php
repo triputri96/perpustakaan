@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Perpustakaan</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../../dist/css/style.css" />
-</head>
+<?php include("../partials/user-head.php"); ?>
 
 <body>
   <header>
@@ -39,12 +28,6 @@
             </div>
           </div>
         </div>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   </header>
@@ -58,20 +41,21 @@
               <thead>
                 <tr>
                   <th class="col-1">No</th>
-                  <th class="col-2">Judul Buku</th>
-                  <th class="col-4">Tanggal Pinjam</th>
-                  <th class="col-3">Status</th>
+                  <th class="col-3">Judul Buku</th>
+                  <th class="col-2">Tanggal Pinjam</th>
+                  <th class="col-2">Tanggal Kembali</th>
+                  <th class="col-2">Status</th>
                   <th class="col-2">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $query = "SELECT data_peminjaman.id, data_peminjaman.is_returned, data_peminjaman.tgl_pinjam, data_buku.judul 
+                $query = "SELECT data_peminjaman.id, data_peminjaman.is_returned, data_peminjaman.tgl_pinjam, data_peminjaman.tgl_kembali, data_buku.judul 
                   FROM data_peminjaman 
                   INNER JOIN data_buku 
                   ON data_peminjaman.buku_id = data_buku.id";
-                  // INNER JOIN data_user
-                  // ON data_peminjaman.user_id = data_user.id";
+                // INNER JOIN data_user
+                // ON data_peminjaman.user_id = data_user.id";
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
                 while ($pinjam = mysqli_fetch_array($sql)) {
@@ -80,6 +64,11 @@
                     <td><?php echo $no; ?></td>
                     <td><?php echo $pinjam['judul']; ?></td>
                     <td><?php echo $pinjam['tgl_pinjam']; ?></td>
+                    <td><?php if (is_null($pinjam['tgl_kembali'])) {
+                          echo "-";
+                        } else {
+                          echo $pinjam['tgl_kembali'];
+                        }; ?></td>
                     <td><?php if ($pinjam['is_returned'] == 1) {
                           echo 'Dikembalikan';
                         } else {
@@ -88,7 +77,7 @@
                     <td>
                       <form method="post" action="../../app/Services/userDashboard.php?id=<?= $pinjam['id']; ?>">
                         <!-- TODO: ganti ikon nnti -->
-                        <button type="submit" name="btnKembalikan" class="btn text-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" name="btnKembalikan" class="btn text-info"><i class="fa-solid fa-box-archive"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -105,18 +94,4 @@
     </div>
     </div>
   </section>
-  <script>
-    window.addEventListener("scroll", function() {
-      var navbar = document.getElementById("navbar");
-      if (window.scrollY > 50) {
-        navbar.style.backgroundColor = "rgba(248, 252, 251, 1)"; // Warna transparan
-        navbar.style.transform = "translateY(-10px)"; // Geser navbar ke atas
-      } else {
-        navbar.style.backgroundColor = "transparent";
-        navbar.style.transform = "translateY(0)"; // Reset posisi navbar
-      }
-    });
-  </script>
-</body>
-
-</html>
+  <?php include("../partials/user-footer.php"); ?>

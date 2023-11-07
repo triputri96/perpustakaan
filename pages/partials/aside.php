@@ -7,10 +7,8 @@
         <img src="../../dist/img/jiun.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <p class="d-block">
-          <?
-          // TODO : MENAMPILKAN NAMA USER BELUM
-          session_start();
+        <p class="d-block" style="color: #C2C7D0; text-transform:capitalize;">
+          <?php
           echo $_SESSION['username'];
           ?>
         </p>
@@ -62,7 +60,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="../../pages/admin/auth/logout.php" class="nav-link">
+          <a href="../../pages/auth/logout.php" class="nav-link">
             <i class="nav-icon far fa-solid fa-arrow-right-from-bracket"></i>
             <p>
               Log Out

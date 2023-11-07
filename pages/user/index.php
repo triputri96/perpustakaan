@@ -1,24 +1,7 @@
-<!DOCTYPE html>
 <?php
-session_start();
-if (!isset($_SESSION['username'])) {
-	header('location:../auth/login.php');
-}
-
-include '../../config/koneksi.php';
+include("../partials/user-head.php");
+require('../../app/Services/userDashboard.php');
 ?>
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Perpustakaan</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-	<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-	<link rel="stylesheet" href="../../dist/css/style.css" />
-</head>
 
 <body>
 	<header>
@@ -74,11 +57,10 @@ include '../../config/koneksi.php';
 			</div>
 		</div>
 	</section>
-	<?php require('../../app/Services/userDashboard.php') ?>
 	<section id="book">
 		<div class="book-section">
 			<div class="p-5">
-				<div class="">
+				<div class="mb-4">
 					<h3>Daftar Buku</h3>
 				</div>
 				<div class="row">
@@ -101,11 +83,11 @@ include '../../config/koneksi.php';
 					while ($book = mysqli_fetch_array($sql)) :
 					?>
 						<div id="imgContainer" class="col-2">
-							<div class="card w-100">
+							<div class="card position-relative w-100">
 								<div class="card-body">
 									<a href="pinjamBuku.php?idBuku=<?= $book['id'] ?>" class="text-decoration-none text-dark">
 										<div class="d-flex justify-content-center">
-											<img src="../../dist/img/bukusakti.jpg" alt="" width="200" />
+											<img src="../../dist/img/<?php echo $book['cover']?>" alt="" class="w-100" />
 										</div>
 										<div class="mt-2">
 											<h6 class="font-size align-text">
@@ -124,19 +106,4 @@ include '../../config/koneksi.php';
 			</div>
 		</div>
 	</section>
-	<script src="../../dist/js/script.js"></script>
-	<script>
-		window.addEventListener("scroll", function() {
-			var navbar = document.getElementById("navbar");
-			if (window.scrollY > 50) {
-				navbar.style.backgroundColor = "rgba(248, 252, 251, 1)"; // Warna transparan
-				navbar.style.transform = "translateY(-10px)"; // Geser navbar ke atas
-			} else {
-				navbar.style.backgroundColor = "transparent";
-				navbar.style.transform = "translateY(0)"; // Reset posisi navbar
-			}
-		});
-	</script>
-</body>
-
-</html>
+	<?php include("../partials/user-footer.php"); ?>

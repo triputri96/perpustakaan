@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Perpustakaan</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../../dist/css/style.css" />
-</head>
+<?php include("../partials/user-head.php"); ?>
 
 <body>
   <header>
@@ -39,12 +28,6 @@
             </div>
           </div>
         </div>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   </header>
@@ -97,18 +80,4 @@
     </div>
     </div>
   </section>
-  <script>
-    window.addEventListener("scroll", function() {
-      var navbar = document.getElementById("navbar");
-      if (window.scrollY > 50) {
-        navbar.style.backgroundColor = "rgba(248, 252, 251, 1)"; // Warna transparan
-        navbar.style.transform = "translateY(-10px)"; // Geser navbar ke atas
-      } else {
-        navbar.style.backgroundColor = "transparent";
-        navbar.style.transform = "translateY(0)"; // Reset posisi navbar
-      }
-    });
-  </script>
-</body>
-
-</html>
+  <?php include("../partials/user-footer.php"); ?>

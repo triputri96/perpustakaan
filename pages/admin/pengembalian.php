@@ -41,12 +41,12 @@
                   <th class="col-1">No</th>
                   <th class="col-2">Judul Buku</th>
                   <th class="col-3">Peminjam</th>
-                  <th class="col-4">Tanggal Pinjam</th>
+                  <th class="col-4">Tanggal Kembali</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $query = "SELECT data_peminjaman.id, data_user.username, data_peminjaman.tgl_pinjam, data_buku.judul 
+                $query = "SELECT data_peminjaman.id, data_user.username, data_peminjaman.tgl_kembali, data_buku.judul 
                   FROM data_peminjaman 
                   INNER JOIN data_buku 
                   ON data_peminjaman.buku_id = data_buku.id 
@@ -61,7 +61,7 @@
                     <td><?php echo $no; ?></td>
                     <td><?php echo $pinjam['judul']; ?></td>
                     <td><?php echo $pinjam['username']; ?></td>
-                    <td><?php echo $pinjam['tgl_pinjam']; ?></td>
+                    <td><?php echo $pinjam['tgl_kembali']; ?></td>
                   <tr>
                   <?php
                   $no++;

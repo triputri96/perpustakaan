@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+	header('location:../404.php');
+}
+?>
 <html lang="en" dir="ltr">
 
 <head>
@@ -18,9 +24,7 @@
 		</div>
 		<?php
 		if (isset($_GET['pesan'])) {
-
 		?>
-
 			<div class="alert alert-warning alert-dismissible fade show" role="alert">
 				<strong>Login Gagal!</strong>
 				<?php echo $_GET['pesan']; ?>
@@ -39,7 +43,7 @@
 				<label for="password">Password</label>
 			</div>
 			<div class="field">
-				<input type="submit" value="Login" name="btnLoginUser">
+				<input type="submit" value="Login" name="btnLogin">
 			</div>
 			<div class="signup-link">
 				Tidak punya akun? <a href="/pages/auth/daftar.php">daftar sekarang</a>

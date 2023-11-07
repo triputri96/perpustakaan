@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-  header('location:./../pages/admin/auth/login.php');
+  header('location:../auth/login.php');
 }
 
 include '../../config/koneksi.php';

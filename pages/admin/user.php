@@ -4,22 +4,12 @@ require('../../app/Services/user.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
-  <!-- Site wrapper -->
   <div class="wrapper">
-    <!-- navbar -->
     <?php include('../partials/navbar.php'); ?>
-    <!-- Main Sidebar Container -->
     <?php include('../partials/aside.php'); ?>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <?php include('../partials/breadcrumbs.php'); ?>
-
-      <!-- Main content -->
       <section class="content">
-
-        <!-- Default box -->
         <div class="card">
           <div class="card-header">
             <div class="card-header">
@@ -42,13 +32,15 @@ require('../../app/Services/user.php');
               <thead>
                 <tr>
                   <th class="col-1">No</th>
-                  <th class="col-2">Username</th>
-                  <th class="col-5">Aksi</th>
+                  <th class="col-3">Username</th>
+                  <th class="col-3">Level</th>
+                  <th class="col-3">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $query = "SELECT * FROM data_user";
+                $username = $_SESSION['username'];
+                $query = "SELECT * FROM data_user WHERE NOT username='$username'";
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
                 while ($user = mysqli_fetch_array($sql)) {
@@ -56,6 +48,7 @@ require('../../app/Services/user.php');
                   <tr>
                     <td><?php echo $no; ?></td>
                     <td><?php echo $user['username']; ?></td>
+                    <td><?php echo $user['level']; ?></td>
                     <td>
                       <form method="post" action="../../app/Services/user.php?id=<?= $user['id']; ?>">
                         <!-- <button type="submit" name="edit" class="btn text-info"><i class="fas fa-edit"></i></button> -->
@@ -82,19 +75,8 @@ require('../../app/Services/user.php');
           </div> -->
           <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
-
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
     <?php include('../partials/footer.php'); ?>
-    <!-- Control Sidebar -->
-    <!-- <aside class="control-sidebar control-sidebar-dark"> -->
-    <!-- Control sidebar content goes here -->
-    <!-- </aside> -->
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
   <?php include('../partials/scripts.php') ?>

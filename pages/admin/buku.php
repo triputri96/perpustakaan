@@ -63,14 +63,16 @@ require('../../app/Services/buku.php');
                     <td><?php echo $book['genre']; ?></td>
                     <td><?php echo $book['deskripsi']; ?></td>
                     <td class="d-flex">
-                      <a type="submit" name="editBuku" class="btn text-info" href="tambahBuku.php?id=<?= $book['id'] ?>"><i class="fas fa-edit"></i></a>
+                      <a type="submit" name="editBuku" class="btn text-info" href="tambahBuku.php?editId=<?= $book['id'] ?>"><i class="fas fa-edit"></i></a>
                       <form method="post" action="../../app/Services/buku.php?id=<?= $book['id']; ?>">
                         <!-- <button type="submit" name="editBuku" class="btn text-info"><i class="fas fa-edit"></i></button> -->
                         <button type="submit" name="deleteBuku" class="btn text-danger"><i class="fas fa-trash"></i></button>
                       </form>
                     </td>
                   </tr>
-                <?php } ?>
+                <?php
+                  $no++;
+                } ?>
               </tbody>
             </table>
           </div>
