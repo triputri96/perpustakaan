@@ -47,6 +47,7 @@ if (isset($_POST['tambahBuku'])) {
     }
   } else {
     $id = $_GET['updateId'];
+<<<<<<< HEAD
     if ($_FILES['coverImg']['name'] != "") {
       $queryHapus = mysqli_query($konek, "SELECT cover from data_buku where id='$id'");
       $buku = mysqli_fetch_array($queryHapus);
@@ -71,19 +72,31 @@ if (isset($_POST['tambahBuku'])) {
       if ($query) {
         echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
       }
+=======
+    $query = mysqli_query($konek, "UPDATE data_buku SET judul='$judul',pengarang='$pengarang', genre='$genre', deskripsi='$deskripsi', cover='$cover' WHERE id='$id'");
+    if ($query) {
+      echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
+>>>>>>> b9be6bc154a7c77a49158fbb946f2187becfea51
     }
   }
 }
 
 if (isset($_POST['deleteBuku'])) {
   $id = $_GET['id'];
+<<<<<<< HEAD
   $queryHapus = mysqli_query($konek, "SELECT cover from data_buku where id='$id'");
   $buku = mysqli_fetch_array($queryHapus);
 
   unlink("../../dist/uploads/" . $buku['cover']);
 
+=======
+>>>>>>> b9be6bc154a7c77a49158fbb946f2187becfea51
   $query = mysqli_query($konek, "DELETE FROM data_buku WHERE id='$id'");
   if ($query) {
     echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b9be6bc154a7c77a49158fbb946f2187becfea51
