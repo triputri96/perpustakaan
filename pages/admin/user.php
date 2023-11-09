@@ -12,11 +12,9 @@ require('../../app/Services/user.php');
       <section class="content">
         <div class="card">
           <div class="card-header">
-            <div class="card-header">
-              <h3 class="card-title">Data User</h3>
-              <div class="card-tools">
-                <a class="btn btn-info" href="tambahUser.php"><i class="fas fa-plus"></i> Insert</a>
-              </div>
+            <h3 class="card-title">Data User</h3>
+            <div class="card-tools">
+              <a class="btn btn-info" href="tambahUser.php"><i class="fas fa-plus"></i> Insert</a>
             </div>
           </div>
           <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -48,7 +46,7 @@ require('../../app/Services/user.php');
                 if (isset($_GET['table_search'])) {
                   $cari = $_GET['table_search'];
                   $query = "SELECT * FROM data_user WHERE NOT username='$username' AND username LIKE '%$cari%' OR level LIKE '%$cari%'";
-                }else {
+                } else {
                   $query = "SELECT * FROM data_user WHERE NOT username='$username'";
                 }
                 $sql = mysqli_query($konek, $query);
