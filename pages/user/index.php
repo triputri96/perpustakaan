@@ -5,7 +5,7 @@ require('../../app/Services/userDashboard.php');
 
 <body>
 	<header>
-		<nav id="navbar" class="navbar navbar-expand-lg fixed-top bg-nav">
+		<nav id="navbar" class="navbar navbar-user navbar-expand-lg fixed-top bg-nav">
 			<div class="container-fluid navbar-container">
 				<a class="navbar-brand" href="../user/index.php#home">Logo</a>
 				<button class="navbar-toggler justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,13 +72,13 @@ require('../../app/Services/userDashboard.php');
                     } else {
                         $query = "SELECT * FROM data_buku";
                     }
-                    $sql = mysqli_query($konek, $query);
-                    if (isset($_GET['search_results'])) {
-                        // Tampilkan hasil pencarian
-                        echo '<script>window.location.href = "#search-results";</script>';
-                    } else {
-                        // Tampilkan tampilan awal
-                    }
+                    // $sql = mysqli_query($konek, $query);
+                    // if (isset($_GET['search_results'])) {
+                    //     // Tampilkan hasil pencarian
+                    //     echo '<script>window.location.href = "#search-results";</script>';
+                    // } else {
+                    //     // Tampilkan tampilan awal
+                    // }
                     $sql = mysqli_query($konek, $query);
                     while ($book = mysqli_fetch_array($sql)) :
                     ?>

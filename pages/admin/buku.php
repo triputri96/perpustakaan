@@ -22,36 +22,45 @@ require('../../app/Services/buku.php');
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <div class="card-header">
-              <h3 class="card-title">Data Buku</h3>
-              <div class="card-tools">
-                <a class="btn btn-info" href="tambahBuku.php"><i class="fas fa-plus"></i> Insert</a>
-                <!-- <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div> -->
-              </div>
+            <h3 class="card-title">Data Buku</h3>
+            <div class="card-tools">
+              <a class="btn btn-info" href="tambahBuku.php"><i class="fas fa-plus"></i> Insert</a>
             </div>
           </div>
           <div class="card-body table-responsive p-0" style="height: 300px;">
+            <!-- Seach filter -->
+            <div class="d-flex justify-content-end search-container">
+              <form action="#search_results" method="get">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                    <button type="submit" name="table-btn-search" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
             <table class="table table-head-fixed text-nowrap">
               <thead>
                 <tr>
                   <th class="col-1">No</th>
                   <th class="col-2">Judul</th>
                   <th class="col-2">Pengarang</th>
-                  <th class="col-2">Genre</th>
-                  <th class="col-3">Deskripsi</th>
+                  <th class="col-1">Genre</th>
+                  <th class="col-2">Deskripsi</th>
+                  <th class="col-2">Cover</th>
                   <th class="col-2">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $query = "SELECT * FROM data_buku";
+                if (isset($_GET['table_search'])) {
+                  $cari = $_GET['table_search'];
+                  $query = "SELECT * FROM data_buku WHERE judul LIKE '%$cari%' OR pengarang LIKE '%$cari%' OR genre LIKE '%$cari%' OR deskripsi LIKE '%$cari%'";
+                } else {
+                  $query = "SELECT * FROM data_buku";
+                }
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
                 while ($book = mysqli_fetch_array($sql)) {
@@ -77,17 +86,6 @@ require('../../app/Services/buku.php');
               </tbody>
             </table>
           </div>
-          <!-- /.card-body -->
-          <!-- <div class="card-footer clearfix">
-            <ul class="pagination pagination-sm m-0 float-right">
-              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-            </ul>
-          </div> -->
-          <!-- /.card-footer-->
         </div>
         <!-- /.card -->
 

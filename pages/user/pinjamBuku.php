@@ -2,7 +2,7 @@
 
 <body>
   <header>
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top bg-nav">
+    <nav id="navbar" class="navbar navbar-user navbar-expand-lg fixed-top bg-nav">
       <div class="container-fluid navbar-container">
         <a class="navbar-brand" href="../user/index.php#home">Logo</a>
         <button class="navbar-toggler justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

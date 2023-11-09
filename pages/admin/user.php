@@ -16,18 +16,23 @@ require('../../app/Services/user.php');
               <h3 class="card-title">Data User</h3>
               <div class="card-tools">
                 <a class="btn btn-info" href="tambahUser.php"><i class="fas fa-plus"></i> Insert</a>
-                <!-- <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div> -->
               </div>
             </div>
           </div>
           <div class="card-body table-responsive p-0" style="height: 300px;">
+            <!-- Seach filter -->
+            <div class="d-flex justify-content-end search-container">
+              <form action="#search_results" method="get">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                  <div class="input-group-append">
+                    <button type="submit" name="table-btn-search" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
             <table class="table table-head-fixed text-nowrap">
               <thead>
                 <tr>
@@ -40,7 +45,12 @@ require('../../app/Services/user.php');
               <tbody>
                 <?php
                 $username = $_SESSION['username'];
-                $query = "SELECT * FROM data_user WHERE NOT username='$username'";
+                if (isset($_GET['table_search'])) {
+                  $cari = $_GET['table_search'];
+                  $query = "SELECT * FROM data_user WHERE NOT username='$username' AND username LIKE '%$cari%' OR level LIKE '%$cari%'";
+                }else {
+                  $query = "SELECT * FROM data_user WHERE NOT username='$username'";
+                }
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
                 while ($user = mysqli_fetch_array($sql)) {

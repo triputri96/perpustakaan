@@ -6,7 +6,7 @@
 body {
   background-color: #f8fcfb;
 }
-.navbar {
+.navbar-user{
   transition:
     background-color 0.5s,
     transform 0.5s;
@@ -29,4 +29,7 @@ body {
 .card-primary:not(.card-outline) > .card-header {
   background-color: #97f9e3;
   color: black;
+}
+.search-container{
+  padding: 12px 20px;
 }

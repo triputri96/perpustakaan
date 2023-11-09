@@ -20,21 +20,22 @@
           <div class="card-header">
             <div class="card-header">
               <h3 class="card-title">Data Peminjaman</h3>
-
-              <div class="card-tools">
+            </div>
+          </div>
+          <div class="card-body table-responsive p-0" style="height: 300px;">
+            <!-- Seach filter -->
+            <div class="d-flex justify-content-end search-container">
+              <form action="#search_results" method="get">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
                   <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
+                    <button type="submit" name="table-btn-search" class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
-          </div>
-          <div class="card-body table-responsive p-0" style="height: 300px;">
             <table class="table table-head-fixed text-nowrap">
               <thead>
                 <tr>
@@ -46,18 +47,20 @@
               </thead>
               <tbody>
                 <?php
+                $queryParam = '';
                 if (isset($_GET['table_search'])) {
                   $cari = $_GET['table_search'];
-                  $query = "SELECT *FROM data_peminjaman where judul LIKE '%$cari%";
-                } else {
-
-                  $query = "SELECT data_peminjaman.id, data_user.username, data_peminjaman.tgl_pinjam, data_buku.judul 
+                  $queryParam = "AND (data_buku.judul LIKE '%$cari%' OR data_user.username LIKE '%$cari%' OR data_peminjaman.tgl_pinjam LIKE '%$cari%')";
+                }
+                $query = "SELECT data_peminjaman.id, data_user.username, data_peminjaman.tgl_pinjam, data_buku.judul 
                   FROM data_peminjaman 
                   INNER JOIN data_buku 
                   ON data_peminjaman.buku_id = data_buku.id 
                   INNER JOIN data_user
                   ON data_peminjaman.user_id = data_user.id
                   WHERE data_peminjaman.is_returned = '0'";
+                if (isset($_GET['table_search'])) {
+                  $query = $query . ' ' . $queryParam;
                 }
                 $sql = mysqli_query($konek, $query);
                 $no = 1;
