@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-  header('location:../auth/login.php');
-}
 
-include '../../config/koneksi.php';
-?>
 <html lang="en">
 
 <head>
@@ -21,3 +14,19 @@ include '../../config/koneksi.php';
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
+<?php
+include '../../config/koneksi.php';
+
+session_start();
+if (!isset($_SESSION['username'])) {
+  header('location:../auth/login.php');
+} else {
+  $username = $_SESSION['username'];
+  $q = "SELECT level FROM data_user WHERE username='$username'";
+  $sql = mysqli_query($konek, $q)->fetch_assoc();
+  if ($sql['level'] == 'user') {
+    header('location:../404.php');
+  }
+}
+?>
