@@ -1,6 +1,6 @@
 <?php
 include('../partials/head.php');
-// require('../../app/Services/user/user.php');
+require('../../app/Services/authService.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -29,6 +29,18 @@ include('../partials/head.php');
                 <div class="card-header">
                   <h3 class="card-title">Insert <small>User Baru</small></h3>
                 </div>
+                <?php
+                if (isset($_GET['pesan'])) {
+
+                ?>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Insert Data Gagal!</strong>
+                    <?php echo $_GET['pesan']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php
+                }
+                ?>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form id="quickForm" action="../../app/Services/authService.php" method="post">
@@ -47,7 +59,7 @@ include('../partials/head.php');
                           </label>
                         </div>
                         <div class="form-check d-flex align-items-center">
-                          <input class="form-check-input" type="radio" name="level" id="user" value="user">
+                          <input class="form-check-input" type="radio" name="level" id="user" value="user" checked>
                           <label class="form-check-label" for="user">
                             User
                           </label>

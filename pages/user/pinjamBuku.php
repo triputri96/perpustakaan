@@ -18,6 +18,18 @@
                 <li class="nav-item col">
                   <a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
                 </li>
+                <?php
+                // check identitas user logged in
+                $username = $_SESSION['username'];
+                $qlog = mysqli_query($konek, "SELECT id, level FROM data_user WHERE username='$username'");
+                $logged = mysqli_fetch_array($qlog);
+                $user_id = $logged['id'];
+                if ($logged['level'] == 'admin') :
+                ?>
+                  <li class="nav-item col">
+                    <a class="nav-link color-black" href="../admin/dashboard.php">Dashboard</a>
+                  </li>
+                <?php endif; ?>
                 <li class="nav-item col">
                   <a class="nav-link color-black" href="../auth/logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
@@ -39,21 +51,49 @@
           <?php
           include '../../config/koneksi.php';
           $id_buku = $_GET['idBuku'];
+          $isBorrowed = false;
           $query = mysqli_query($konek, "SELECT * FROM data_buku WHERE id='$id_buku'");
           $dataBuku = mysqli_fetch_array($query);
+
+          //  check apakah peminjaman buku sudah dikembalikan
+          $id = $_GET['idBuku'];
+          $qPinjam = mysqli_query($konek, "SELECT tgl_kembali, id FROM data_peminjaman WHERE user_id = '$user_id' AND buku_id = '$id_buku' AND is_returned = '0'");
+          if (mysqli_num_rows($qPinjam) > 0) {
+            $pinjaman = mysqli_fetch_array($qPinjam);
+            if ($pinjaman['tgl_kembali'] == NULL) {
+              $isBorrowed = true;
+            }
+          }
           ?>
           <form id="quickForm" action="<?php if (isset($_GET['idBuku'])) {
-                                          echo "../../app/Services/userDashboard.php?idBuku=" . $_GET['idBuku'];
+                                          if ($isBorrowed) {
+                                            echo "../../app/Services/userDashboard.php?idPeminjaman=" . $pinjaman['id'];
+                                          } else {
+                                            echo "../../app/Services/userDashboard.php?idBuku=" . $_GET['idBuku'];
+                                          }
                                         } ?>" method="post">
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
                   <div class="d-flex justify-content-center">
-                    <img src="../../dist/uploads/<?php echo $dataBuku['cover']; ?>" alt="cover" width="300">
+                    <div class="w-50">
+                      <div style="height:350px;background-image:url('../../dist/uploads/<?php echo $dataBuku['cover'] ?>');background-size:cover;background-repeat:no-repeat;background-position:center;">
+                        <!-- <img src="../../dist/uploads/<?php echo $dataBuku['cover']; ?>" alt="cover" width="300"> -->
+                      </div>
+                    </div>
                   </div>
                   <div class="d-flex justify-content-center">
-                    <button type="submit" name="pinjamBuku" class="mt-2 btn btn-info">Pinjam
-                      Buku</button>
+                    <button type="submit" name="<?php if ($isBorrowed) {
+                                                  echo "btnKembalikan";
+                                                } else {
+                                                  echo "pinjamBuku";
+                                                } ?>" class="mt-2 btn btn-info">
+                      <?php if ($isBorrowed) {
+                        echo "Kembalikan Buku";
+                      } else {
+                        echo "Pinjam Buku";
+                      } ?>
+                    </button>
                   </div>
                 </div>
                 <div class="col-6">
