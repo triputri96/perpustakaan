@@ -92,6 +92,6 @@
           </div>
           <!-- /.card-body -->
         </div>
-        </div>
-    </section>
-    <?php include("../partials/user-footer.php"); ?>
+      </div>
+  </section>
+  <?php include("../partials/user-footer.php"); ?>
