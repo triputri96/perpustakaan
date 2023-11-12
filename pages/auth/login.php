@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
-	header('location:../404.php');
+    header('location:../404.php');
 }
 ?>
 <html lang="en" dir="ltr">
@@ -24,16 +24,16 @@ if (isset($_SESSION['username'])) {
             Login
         </div>
         <?php
-		if (isset($_GET['pesan'])) {
-		?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        if (isset($_GET['pesan'])) {
+        ?>
+        <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Login Gagal!</strong>
             <?php echo $_GET['pesan']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" aria-label="Close" onclick="closeAlert()"></button>
         </div>
         <?php
-		}
-		?>
+        }
+        ?>
         <form action="../../app/Services/authService.php" method="post">
             <div class="field">
                 <input type="text" id="username" name="username" required>
@@ -51,6 +51,12 @@ if (isset($_SESSION['username'])) {
             </div>
         </form>
     </div>
+    <script>
+    function closeAlert() {
+        var myAlert = document.getElementById('myAlert');
+        myAlert.style.display = 'none';
+    }
+    </script>
 </body>
 
 </html>

@@ -33,10 +33,10 @@ require('../../app/Services/authService.php');
                 if (isset($_GET['pesan'])) {
 
                 ?>
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Insert Data Gagal!</strong>
                     <?php echo $_GET['pesan']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="closeAlert()"></button>
                   </div>
                 <?php
                 }
@@ -101,3 +101,9 @@ require('../../app/Services/authService.php');
   </div>
   <!-- ./wrapper -->
   <?php include('../partials/scripts.php') ?>
+  <script>
+    function closeAlert() {
+      var myAlert = document.getElementById('myAlert');
+      myAlert.style.display = 'none';
+    }
+  </script>

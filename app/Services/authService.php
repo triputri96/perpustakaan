@@ -24,11 +24,11 @@ if (isset($_POST['btnLogin'])) {
                 }
             } else {
                 //password salah            
-                if ($data['level'] == 'admin') {
-                    header('location:../../pages/admin/auth/login.php');
-                } else if ($data['level'] == 'user') {
-                    header('location:../../pages/auth/login.php?pesan=Password Salah');
-                }
+                // if ($data['level'] == 'admin') {
+                //     header('location:../../pages/admin/auth/login.php');
+                // } else if ($data['level'] == 'user') {
+                header('location:../../pages/auth/login.php?pesan=Password Salah');
+                // }
             }
         } else {
             //Username salah
