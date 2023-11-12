@@ -47,7 +47,11 @@ require('../../app/Services/authService.php');
                   <div class="card-body">
                     <div class="form-group">
                       <label for="username">Username</label>
-                      <input type="username" name="username" class="form-control" id="username">
+                      <input type="username" name="username" class="form-control" id="username" value="<?php if (array_key_exists('user', $_SESSION)) {
+                                                                                                echo  $_SESSION['user'];
+                                                                                              } else {
+                                                                                                echo '';
+                                                                                              } ?>">
                     </div>
                     <div class="form-group">
                       <label>Level</label>

@@ -40,11 +40,22 @@ if (isset($_POST['btnLogin'])) {
 }
 
 if (isset($_POST['btnDaftar'])) {
+    if ($_POST['level'] != "") {
+        session_start();
+        if (!empty($_POST['username'])) {
+            $_SESSION['user'] = $_POST['username'];
+        }
+        // if (!empty($_POST['password'])) {
+        //     $_SESSION['pass'] = $_POST['password'];
+        // }
+    }
     if (empty($_POST['username'])) {
+        $_SESSION['user'] = $_POST['username'];
         header('location:../../pages/admin/tambahUser.php?pesan=Username harus diisi');
         return;
     }
     if (empty($_POST['password'])) {
+        // $_SESSION['pass'] = $_POST['password'];
         header('location:../../pages/admin/tambahUser.php?pesan=Password harus diisi');
         return;
     }
@@ -61,7 +72,14 @@ if (isset($_POST['btnDaftar'])) {
         if ($_POST['level'] == "") {
             echo "<script>alert('Sukses'); window.location.href='../../pages/auth/login.php'</script>";
         } else {
+            unsetSession();
             echo "<script>alert('Sukses'); window.location.href='../../pages/admin/user.php'</script>";
         }
     }
+}
+
+function unsetSession()
+{
+    unset($_SESSION['user']);
+    unset($_SESSION['pass']);
 }
