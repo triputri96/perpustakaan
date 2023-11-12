@@ -4,23 +4,24 @@ require('../../app/Services/buku.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <?php include('../partials/navbar.php'); ?>
-        <?php include('../partials/aside.php'); ?>
-        <div class="content-wrapper">
-            <?php include('../partials/breadcrumbs.php'); ?>
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- TODO: kalau pengen ubah warnanya sesuai brand pakai kelas card-form, cek style.css -->
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Insert <small>Buku Baru</small></h3>
-                                </div>
-                                <?php
+  <div class="wrapper">
+    <?php
+    include('../partials/navbar.php');
+    include('../partials/aside.php');
+    ?>
+    <div class="content-wrapper">
+      <?php include('../partials/breadcrumbs.php'); ?>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- TODO: kalau pengen ubah warnanya sesuai brand pakai kelas card-form, cek style.css -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Insert <small>Buku Baru</small></h3>
+                </div>
+                <?php
                 if (isset($_GET['pesan'])) {
-
                 ?>
                                 <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong>Insert Data Gagal!</strong>
@@ -36,48 +37,50 @@ require('../../app/Services/buku.php');
                                                                             } else {
                                                                               echo "../../app/Services/buku.php";
                                                                             } ?>" method="post">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="judul">Judul</label>
-                                            <input type="judul" name="judul" class="form-control" id="judul" value="<?php if (is_null($buku)) {
-                                                                                                echo '';
-                                                                                              } else {
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="judul">Judul</label>
+                      <input type="judul" name="judul" class="form-control" id="judul" value="<?php if (!is_null($buku)) {
                                                                                                 echo $buku['judul'];
-                                                                                              } ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pengarang">Pengarang</label>
-                                            <input type="pengarang" name="pengarang" class="form-control" id="pengarang"
-                                                value="<?php if (is_null($buku)) {
-                                                                                                            echo '';
-                                                                                                          } else {
-                                                                                                            echo $buku['pengarang'];
-                                                                                                          } ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="genre">Genre</label>
-                                            <input type="genre" name="genre" class="form-control" id="genre" value="<?php if (is_null($buku)) {
-                                                                                                echo '';
+                                                                                              } else if (array_key_exists('judul', $_SESSION)) {
+                                                                                                echo  $_SESSION['judul'];
                                                                                               } else {
-                                                                                                echo $buku['genre'];
+                                                                                                echo '';
                                                                                               } ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="deskripsi">Deskripsi</label>
-                                            <input type="deskripsi" name="deskripsi" class="form-control" id="deskripsi"
-                                                value="<?php if (is_null($buku)) {
-                                                                                                            echo '';
+                    </div>
+                    <div class="form-group">
+                      <label for="pengarang">Pengarang</label>
+                      <input type="pengarang" name="pengarang" class="form-control" id="pengarang" value="<?php if (!is_null($buku)) {
+                                                                                                            echo $buku['pengarang'];
+                                                                                                          } else if (array_key_exists('pengarang', $_SESSION)) {
+                                                                                                            echo $_SESSION['pengarang'];;
                                                                                                           } else {
+                                                                                                            echo '';
+                                                                                                          } ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="genre">Genre</label>
+                      <input type="genre" name="genre" class="form-control" id="genre" value="<?php if (!is_null($buku)) {
+                                                                                                echo $buku['genre'];
+                                                                                              } else if (array_key_exists('genre', $_SESSION)) {
+                                                                                                echo $_SESSION['genre'];
+                                                                                              } else {
+                                                                                                echo '';
+                                                                                              } ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="deskripsi">Deskripsi</label>
+                      <input type="deskripsi" name="deskripsi" class="form-control" id="deskripsi" value="<?php if (!is_null($buku)) {
                                                                                                             echo $buku['deskripsi'];
+                                                                                                          } else if (array_key_exists('deskripsi', $_SESSION)) {
+                                                                                                            echo $_SESSION['deskripsi'];
+                                                                                                          } else {
+                                                                                                            echo '';
                                                                                                           } ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="cover">Cover</label>
-                                            <input type="file" name="coverImg" class="form-control" id="cover" value="<?php if (is_null($buku)) {
-                                                                                                  echo '';
-                                                                                                } else {
-                                                                                                  echo $buku['cover'];
-                                                                                                } ?>">
+                                            <input type="file" name="coverImg" class="form-control" id="cover" value="">
                                         </div>
                                     </div>
                                     <div class="card-footer">

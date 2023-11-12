@@ -24,23 +24,46 @@ if (isset($_GET['editId'])) {
 }
 
 if (isset($_POST['tambahBuku'])) {
+  session_start();
+  if (!empty($_POST['judul'])) {
+    $_SESSION['judul'] = $_POST['judul'];
+  }
+  if (!empty($_POST['pengarang'])) {
+    $_SESSION['pengarang'] = $_POST['pengarang'];
+  }
+  if (!empty($_POST['genre'])) {
+    $_SESSION['genre'] = $_POST['genre'];
+  }
+  if (!empty($_POST['deskripsi'])) {
+    $_SESSION['deskripsi'] = $_POST['deskripsi'];
+  }
+  if (!empty($_FILES['coverImg'])) {
+    $_SESSION['coverImg'] = $_FILES['coverImg'];
+  }
+
+  // CHECK IS EMPTY OR NOT
   if (empty($_POST['judul'])) {
+    $_SESSION['judul'] = $_POST['judul'];
     header('location:../../pages/admin/tambahBuku.php?pesan=Judul harus diisi');
     return;
   }
   if (empty($_POST['pengarang'])) {
+    $_SESSION['pengarang'] = $_POST['pengarang'];
     header('location:../../pages/admin/tambahBuku.php?pesan=Pengarang harus diisi');
     return;
   }
   if (empty($_POST['genre'])) {
+    $_SESSION['genre'] = $_POST['genre'];
     header('location:../../pages/admin/tambahBuku.php?pesan=Genre harus diisi');
     return;
   }
   if (empty($_POST['deskripsi'])) {
+    $_SESSION['deskripsi'] = $_POST['deskripsi'];
     header('location:../../pages/admin/tambahBuku.php?pesan=Deskripsi harus diisi');
     return;
   }
-  if (empty($_POST['coverImg'])) {
+  if (empty($_FILES['coverImg']['name'])) {
+    $_SESSION['coverImg']['name'] = $_FILES['coverImg']['name'];
     header('location:../../pages/admin/tambahBuku.php?pesan=Cover buku harus diisi');
     return;
   }
@@ -64,6 +87,7 @@ if (isset($_POST['tambahBuku'])) {
     move_uploaded_file($_FILES['coverImg']['tmp_name'], $targetFile);
     $query = mysqli_query($konek, "INSERT INTO data_buku (judul, pengarang, genre, deskripsi, cover) VALUES ('$judul', '$pengarang', '$genre', '$deskripsi', '$cover')");
     if ($query) {
+      unsetSession();
       echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
     }
   } else {
@@ -71,7 +95,7 @@ if (isset($_POST['tambahBuku'])) {
     if ($_FILES['coverImg']['name'] != "") {
       $queryHapus = mysqli_query($konek, "SELECT cover from data_buku where id='$id'");
       $buku = mysqli_fetch_array($queryHapus);
-
+      // remove pict from folder
       unlink("../../dist/uploads/" . $buku['cover']);
 
       $targetDir = '../../dist/uploads/';
@@ -84,16 +108,25 @@ if (isset($_POST['tambahBuku'])) {
 
       $query = mysqli_query($konek, "UPDATE data_buku SET judul='$judul',pengarang='$pengarang', genre='$genre', deskripsi='$deskripsi', cover='$cover' WHERE id='$id'");
       if ($query) {
+        unsetSession();
         echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
       }
     } else {
-      # code...
       $query = mysqli_query($konek, "UPDATE data_buku SET judul='$judul',pengarang='$pengarang', genre='$genre', deskripsi='$deskripsi' WHERE id='$id'");
       if ($query) {
+        unsetSession();
         echo "<script>alert('Sukses'); window.location.href='../../pages/admin/buku.php'</script>";
       }
     }
   }
+}
+
+function unsetSession()
+{
+  unset($_SESSION['judul']);
+  unset($_SESSION['pengarang']);
+  unset($_SESSION['genre']);
+  unset($_SESSION['deskripsi']);
 }
 
 if (isset($_POST['deleteBuku'])) {
