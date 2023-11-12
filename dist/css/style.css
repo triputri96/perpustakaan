@@ -6,13 +6,12 @@
 body {
   background-color: #f8fcfb;
 }
-.navbar-user{
-  transition:
-    background-color 0.5s,
-    transform 0.5s;
+.navbar-user {
+  transition: background-color 0.5s, transform 0.5s;
   padding: 25px 100px;
 }
-.book-section, .koleksi-section {
+.book-section,
+.koleksi-section {
   padding: 100px 0;
 }
 .banner-img {
@@ -30,6 +29,6 @@ body {
   background-color: #97f9e3;
   color: black;
 }
-.search-container{
+.search-container {
   padding: 12px 20px;
 }
