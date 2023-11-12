@@ -16,8 +16,20 @@ require('../../app/Services/buku.php');
               <!-- TODO: kalau pengen ubah warnanya sesuai brand pakai kelas card-form, cek style.css -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Insert <small>Buku</small></h3>
+                  <h3 class="card-title">Insert <small>Buku Baru</small></h3>
                 </div>
+                <?php
+                if (isset($_GET['pesan'])) {
+
+                ?>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Insert Data Gagal!</strong>
+                    <?php echo $_GET['pesan']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php
+                }
+                ?>
                 <form enctype="multipart/form-data" id="quickForm" action="<?php if (isset($_GET['editId'])) {
                                                                               echo "../../app/Services/buku.php?updateId=" . $_GET['editId'];
                                                                             } else {
@@ -27,10 +39,10 @@ require('../../app/Services/buku.php');
                     <div class="form-group">
                       <label for="judul">Judul</label>
                       <input type="judul" name="judul" class="form-control" id="judul" value="<?php if (is_null($buku)) {
-                                                                                                            echo '';
-                                                                                                          } else {
-                                                                                                            echo $buku['judul'];
-                                                                                                          } ?>">
+                                                                                                echo '';
+                                                                                              } else {
+                                                                                                echo $buku['judul'];
+                                                                                              } ?>">
                     </div>
                     <div class="form-group">
                       <label for="pengarang">Pengarang</label>
@@ -43,10 +55,10 @@ require('../../app/Services/buku.php');
                     <div class="form-group">
                       <label for="genre">Genre</label>
                       <input type="genre" name="genre" class="form-control" id="genre" value="<?php if (is_null($buku)) {
-                                                                                                            echo '';
-                                                                                                          } else {
-                                                                                                            echo $buku['genre'];
-                                                                                                          } ?>">
+                                                                                                echo '';
+                                                                                              } else {
+                                                                                                echo $buku['genre'];
+                                                                                              } ?>">
                     </div>
                     <div class="form-group">
                       <label for="deskripsi">Deskripsi</label>
@@ -59,10 +71,10 @@ require('../../app/Services/buku.php');
                     <div class="form-group">
                       <label for="cover">Cover</label>
                       <input type="file" name="coverImg" class="form-control" id="cover" value="<?php if (is_null($buku)) {
-                                                                                                            echo '';
-                                                                                                          } else {
-                                                                                                            echo $buku['cover'];
-                                                                                                          } ?>">
+                                                                                                  echo '';
+                                                                                                } else {
+                                                                                                  echo $buku['cover'];
+                                                                                                } ?>">
                     </div>
                   </div>
                   <div class="card-footer">

@@ -40,6 +40,14 @@ if (isset($_POST['btnLogin'])) {
 }
 
 if (isset($_POST['btnDaftar'])) {
+    if (empty($_POST['username'])) {
+        header('location:../../pages/admin/tambahUser.php?pesan=Username harus diisi');
+        return;
+    }
+    if (empty($_POST['password'])) {
+        header('location:../../pages/admin/tambahUser.php?pesan=Password harus diisi');
+        return;
+    }
     $username = $_POST['username'];
     $p = password_hash($_POST['password'], PASSWORD_BCRYPT);
     if ($_POST['level'] == "") {

@@ -20,6 +20,14 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
+          <a href="../user/index.php" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Home
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="../admin/dashboard.php" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
@@ -45,7 +53,7 @@
         </li>
         <li class="nav-item">
           <a href="../admin/peminjaman.php" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
+          <i class="nav-icon fa-solid fa-book-open-reader"></i>
             <p>
               Peminjaman Buku
             </p>

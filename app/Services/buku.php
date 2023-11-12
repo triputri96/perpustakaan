@@ -24,6 +24,27 @@ if (isset($_GET['editId'])) {
 }
 
 if (isset($_POST['tambahBuku'])) {
+  if (empty($_POST['judul'])) {
+    header('location:../../pages/admin/tambahBuku.php?pesan=Judul harus diisi');
+    return;
+  }
+  if (empty($_POST['pengarang'])) {
+    header('location:../../pages/admin/tambahBuku.php?pesan=Pengarang harus diisi');
+    return;
+  }
+  if (empty($_POST['genre'])) {
+    header('location:../../pages/admin/tambahBuku.php?pesan=Genre harus diisi');
+    return;
+  }
+  if (empty($_POST['deskripsi'])) {
+    header('location:../../pages/admin/tambahBuku.php?pesan=Deskripsi harus diisi');
+    return;
+  }
+  if (empty($_POST['coverImg'])) {
+    header('location:../../pages/admin/tambahBuku.php?pesan=Cover buku harus diisi');
+    return;
+  }
+
   $judul = mysqli_escape_string($konek, $_POST['judul']);
   $pengarang = mysqli_escape_string($konek, $_POST['pengarang']);
   $genre = $_POST['genre'];

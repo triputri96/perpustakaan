@@ -4,40 +4,52 @@ require('../../app/Services/userDashboard.php');
 ?>
 
 <body>
-	<header>
-		<nav id="navbar" class="navbar navbar-user navbar-expand-lg fixed-top bg-nav">
-			<div class="container-fluid navbar-container">
-				<a class="navbar-brand" href="../user/index.php#home">Logo</a>
-				<button class="navbar-toggler justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="mobile-navbar">
-						<div class="">
-							<ul class="navbar-nav navbar-nav me-auto mb-2 mb-lg-0 row">
-								<li class="nav-item col">
-									<a class="nav-link active" aria-current="page" href="#home">Home</a>
-								</li>
-								<li class="nav-item col">
-									<a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
-								</li>
-								<li class="nav-item col">
-									<a class="nav-link color-black" href="../auth/logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-											<path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
-											<path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
-										</svg></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<form class="d-flex" method="GET" action="#search-results">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="cari">
-					<button class="btn btn-outline-success" type="submit">
-						Search
-					</button>
-					<input type="hidden" name="search_results" value="true">
-				</form>
+    <header>
+        <nav id="navbar" class="navbar navbar-user navbar-expand-lg fixed-top bg-nav">
+            <div class="container-fluid navbar-container">
+                <a class="navbar-brand" href="../user/index.php#home">Logo</a>
+                <button class="navbar-toggler justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="mobile-navbar">
+                        <div class="">
+                            <ul class="navbar-nav navbar-nav me-auto mb-2 mb-lg-0 row">
+                                <li class="nav-item col">
+                                    <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                                </li>
+                                <li class="nav-item col">
+                                    <a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
+                                </li>
+                                <?php
+                                // check identitas user logged in
+                                $username = $_SESSION['username'];
+                                $qlog = mysqli_query($konek, "SELECT id, level FROM data_user WHERE username='$username'");
+                                $logged = mysqli_fetch_array($qlog);
+                                $user_id = $logged['id'];
+                                if ($logged['level'] == 'admin') :
+                                ?>
+                                    <li class="nav-item col">
+                                        <a class="nav-link color-black" href="../admin/dashboard.php">Dashboard</a>
+                                    </li>
+                                <?php endif; ?>
+                                <li class="nav-item col">
+                                    <a class="nav-link color-black" href="../auth/logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                        </svg></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form class="d-flex" method="GET" action="#search-results">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="cari">
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                    <input type="hidden" name="search_results" value="true">
+                </form>
 
             </div>
         </nav>
@@ -72,13 +84,6 @@ require('../../app/Services/userDashboard.php');
                     } else {
                         $query = "SELECT * FROM data_buku";
                     }
-                    // $sql = mysqli_query($konek, $query);
-                    // if (isset($_GET['search_results'])) {
-                    //     // Tampilkan hasil pencarian
-                    //     echo '<script>window.location.href = "#search-results";</script>';
-                    // } else {
-                    //     // Tampilkan tampilan awal
-                    // }
                     $sql = mysqli_query($konek, $query);
                     while ($book = mysqli_fetch_array($sql)) :
                     ?>
@@ -86,8 +91,8 @@ require('../../app/Services/userDashboard.php');
                             <div class="card position-relative w-100">
                                 <div class="card-body">
                                     <a href="pinjamBuku.php?idBuku=<?= $book['id'] ?>" class="text-decoration-none text-dark">
-                                        <div class="d-flex justify-content-center">
-                                            <img src="../../dist/uploads/<?php echo $book['cover']; ?>" alt="cover" style="width: 100px;">
+                                        <div class="d-flex justify-content-center position-relative" style="height:200px;background-image:url('../../dist/uploads/<?php echo $book['cover'] ?>');background-size:cover;background-repeat:no-repeat;background-position:center;">
+                                            <!-- <img src="../../dist/uploads/<?php echo $book['cover']; ?>" alt="cover" style="height:100%; ;"> -->
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="font-size text-center">

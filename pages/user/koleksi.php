@@ -18,6 +18,18 @@
                 <li class="nav-item col">
                   <a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
                 </li>
+                <?php
+                // check identitas user logged in
+                $username = $_SESSION['username'];
+                $qlog = mysqli_query($konek, "SELECT id, level FROM data_user WHERE username='$username'");
+                $logged = mysqli_fetch_array($qlog);
+                $user_id = $logged['id'];
+                if ($logged['level'] == 'admin') :
+                ?>
+                  <li class="nav-item col">
+                    <a class="nav-link color-black" href="../admin/dashboard.php">Dashboard</a>
+                  </li>
+                <?php endif; ?>
                 <li class="nav-item col">
                   <a class="nav-link color-black" href="../auth/logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
@@ -77,7 +89,7 @@
                           echo 'Belum dikembalikan';
                         } ?></td>
                     <td>
-                      <form method="post" action="../../app/Services/userDashboard.php?id=<?= $pinjam['id']; ?>">
+                      <form method="post" action="../../app/Services/userDashboard.php?idPeminjaman=<?= $pinjam['id']; ?>">
                         <!-- TODO: ganti ikon nnti -->
                         <button type="submit" name="btnKembalikan" class="btn text-info"><i class="fa-solid fa-box-archive"></i></button>
                       </form>
