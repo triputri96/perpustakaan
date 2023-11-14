@@ -2,6 +2,16 @@
 include('../partials/head.php');
 require('../../app/Services/user.php');
 ?>
+<style>
+    .btn-color {
+        background-color: #97f9e3;
+        transition: 0.3s ease;
+    }
+
+    .btn-color:hover {
+        background-color: #89ecd6;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -14,7 +24,7 @@ require('../../app/Services/user.php');
                     <div class="card-header">
                         <h3 class="card-title">Data User</h3>
                         <div class="card-tools">
-                            <a class="btn btn-info" href="tambahUser.php"><i class="fas fa-plus"></i> Insert</a>
+                            <a class="btn btn-color" href="tambahUser.php"><i class="fas fa-plus"></i> Insert</a>
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0" style="height: 400px;">
@@ -22,8 +32,7 @@ require('../../app/Services/user.php');
                         <div class="d-flex justify-content-end search-container">
                             <form action="#search_results" method="get">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                        placeholder="Search">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" name="table-btn-search" class="btn btn-default">
                                             <i class="fas fa-search"></i>
@@ -43,33 +52,32 @@ require('../../app/Services/user.php');
                             </thead>
                             <tbody>
                                 <?php
-                $username = $_SESSION['username'];
-                if (isset($_GET['table_search'])) {
-                  $cari = $_GET['table_search'];
-                  $query = "SELECT * FROM data_user WHERE NOT username='$username' AND username LIKE '%$cari%' OR level LIKE '%$cari%'";
-                } else {
-                  $query = "SELECT * FROM data_user WHERE NOT username='$username'";
-                }
-                $sql = mysqli_query($konek, $query);
-                $no = 1;
-                while ($user = mysqli_fetch_array($sql)) {
-                ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $user['username']; ?></td>
-                                    <td><?php echo $user['level']; ?></td>
-                                    <td>
-                                        <form method="post" action="../../app/Services/user.php?id=<?= $user['id']; ?>">
-                                            <!-- <button type="submit" name="edit" class="btn text-info"><i class="fas fa-edit"></i></button> -->
-                                            <button type="submit" name="delete" class="btn text-danger"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                $username = $_SESSION['username'];
+                                if (isset($_GET['table_search'])) {
+                                    $cari = $_GET['table_search'];
+                                    $query = "SELECT * FROM data_user WHERE NOT username='$username' AND username LIKE '%$cari%' OR level LIKE '%$cari%'";
+                                } else {
+                                    $query = "SELECT * FROM data_user WHERE NOT username='$username'";
+                                }
+                                $sql = mysqli_query($konek, $query);
+                                $no = 1;
+                                while ($user = mysqli_fetch_array($sql)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $user['username']; ?></td>
+                                        <td><?php echo $user['level']; ?></td>
+                                        <td>
+                                            <form method="post" action="../../app/Services/user.php?id=<?= $user['id']; ?>">
+                                                <!-- <button type="submit" name="edit" class="btn text-info"><i class="fas fa-edit"></i></button> -->
+                                                <button onclick="return confirm('Yakin Menghapus Data Ini?')" type="submit" name="delete" class="btn text-danger"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 <?php
-                  $no++;
-                }
-                ?>
+                                    $no++;
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

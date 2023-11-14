@@ -2,6 +2,16 @@
 include('../partials/head.php');
 require('../../app/Services/buku.php');
 ?>
+<style>
+  .btn-color {
+    background-color: #97f9e3;
+    transition: 0.3s ease;
+  }
+
+  .btn-color:hover {
+    background-color: #89ecd6;
+  }
+</style>
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -23,16 +33,15 @@ require('../../app/Services/buku.php');
                 <?php
                 if (isset($_GET['pesan'])) {
                 ?>
-                                <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>Insert Data Gagal!</strong>
-                                    <?php echo $_GET['pesan']; ?>
-                                    <button type="button" class="btn-close" aria-label="Close"
-                                        onclick="closeAlert()"></button>
-                                </div>
-                                <?php
+                  <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Insert Data Gagal!</strong>
+                    <?php echo $_GET['pesan']; ?>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="closeAlert()"></button>
+                  </div>
+                <?php
                 }
                 ?>
-                                <form enctype="multipart/form-data" id="quickForm" action="<?php if (isset($_GET['editId'])) {
+                <form enctype="multipart/form-data" id="quickForm" action="<?php if (isset($_GET['editId'])) {
                                                                               echo "../../app/Services/buku.php?updateId=" . $_GET['editId'];
                                                                             } else {
                                                                               echo "../../app/Services/buku.php";
@@ -77,30 +86,33 @@ require('../../app/Services/buku.php');
                                                                                                           } else {
                                                                                                             echo '';
                                                                                                           } ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cover">Cover</label>
-                                            <input type="file" name="coverImg" class="form-control" id="cover" value="">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="submit" name="tambahBuku" class="btn btn-info">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                        </div>
                     </div>
-                </div>
-            </section>
+                    <div class="form-group">
+                      <label for="cover">Cover</label>
+                      <input type="file" name="coverImg" class="form-control" id="cover" value="">
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" name="tambahBuku" class="btn btn-color">Submit</button>
+                    <a href="../admin/buku.php" class="btn btn-color">
+                      Keluar
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
         </div>
-        <?php include('../partials/footer.php'); ?>
+      </section>
     </div>
-    <?php include('../partials/scripts.php') ?>
-    <script>
+    <?php include('../partials/footer.php'); ?>
+  </div>
+  <?php include('../partials/scripts.php') ?>
+  <script>
     function closeAlert() {
-        var myAlert = document.getElementById('myAlert');
-        myAlert.style.display = 'none';
+      var myAlert = document.getElementById('myAlert');
+      myAlert.style.display = 'none';
     }
-    </script>
+  </script>

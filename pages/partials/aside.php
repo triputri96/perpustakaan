@@ -1,4 +1,14 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<!-- <style>
+.sidebar-color {
+    background-color: #6892D5;
+}
+
+p,
+.nav-icon {
+    color: black;
+}
+</style> -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="height: 100%;">
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user (optional) -->
@@ -53,7 +63,7 @@
         </li>
         <li class="nav-item">
           <a href="../admin/peminjaman.php" class="nav-link">
-          <i class="nav-icon fa-solid fa-book-open-reader"></i>
+            <i class="nav-icon fa-solid fa-book-open-reader"></i>
             <p>
               Peminjaman Buku
             </p>

@@ -13,6 +13,15 @@ require('../../app/Services/buku.php');
     color: #808080;
     cursor: pointer;
 }
+
+.btn-color {
+    background-color: #97f9e3;
+    transition: 0.3s ease;
+}
+
+.btn-color:hover {
+    background-color: #89ecd6;
+}
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -36,7 +45,7 @@ require('../../app/Services/buku.php');
                     <div class="card-header">
                         <h3 class="card-title">Data Buku</h3>
                         <div class="card-tools">
-                            <a class="btn btn-info" href="tambahBuku.php"><i class="fas fa-plus"></i> Insert</a>
+                            <a class="btn btn-color" href="tambahBuku.php"><i class="fas fa-plus"></i> Insert</a>
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0" style="height: 400px;">
@@ -68,16 +77,16 @@ require('../../app/Services/buku.php');
                             </thead>
                             <tbody>
                                 <?php
-                if (isset($_GET['table_search'])) {
-                  $cari = $_GET['table_search'];
-                  $query = "SELECT * FROM data_buku WHERE judul LIKE '%$cari%' OR pengarang LIKE '%$cari%' OR genre LIKE '%$cari%' OR deskripsi LIKE '%$cari%'";
-                } else {
-                  $query = "SELECT * FROM data_buku";
-                }
-                $sql = mysqli_query($konek, $query);
-                $no = 1;
-                while ($book = mysqli_fetch_array($sql)) {
-                ?>
+                                if (isset($_GET['table_search'])) {
+                                    $cari = $_GET['table_search'];
+                                    $query = "SELECT * FROM data_buku WHERE judul LIKE '%$cari%' OR pengarang LIKE '%$cari%' OR genre LIKE '%$cari%' OR deskripsi LIKE '%$cari%'";
+                                } else {
+                                    $query = "SELECT * FROM data_buku";
+                                }
+                                $sql = mysqli_query($konek, $query);
+                                $no = 1;
+                                while ($book = mysqli_fetch_array($sql)) {
+                                ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $book['judul']; ?></td>
@@ -100,14 +109,15 @@ require('../../app/Services/buku.php');
                                                 class="fas fa-edit"></i></a>
                                         <form method="post" action="../../app/Services/buku.php?id=<?= $book['id']; ?>">
                                             <!-- <button type="submit" name="editBuku" class="btn text-info"><i class="fas fa-edit"></i></button> -->
-                                            <button type="submit" name="deleteBuku" class="btn text-danger"><i
+                                            <button onclick="return confirm('Yakin Menghapus Data Ini?')" type="submit"
+                                                name="deleteBuku" class="btn text-danger"><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
                                 <?php
-                  $no++;
-                } ?>
+                                    $no++;
+                                } ?>
                             </tbody>
                         </table>
                     </div>
