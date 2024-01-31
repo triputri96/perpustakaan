@@ -3,25 +3,25 @@ include('../partials/head.php');
 require('../../app/Services/buku.php');
 ?>
 <style>
-.hidden-content {
-    display: none;
-}
+    .hidden-content {
+        display: none;
+    }
 
-.read-more-btn {
-    border: none;
-    background-color: transparent;
-    color: #808080;
-    cursor: pointer;
-}
+    .read-more-btn {
+        border: none;
+        background-color: transparent;
+        color: #808080;
+        cursor: pointer;
+    }
 
-.btn-color {
-    background-color: #97f9e3;
-    transition: 0.3s ease;
-}
+    .btn-color {
+        background-color: #97f9e3;
+        transition: 0.3s ease;
+    }
 
-.btn-color:hover {
-    background-color: #89ecd6;
-}
+    .btn-color:hover {
+        background-color: #89ecd6;
+    }
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -53,8 +53,7 @@ require('../../app/Services/buku.php');
                         <div class="d-flex justify-content-end search-container">
                             <form action="#search_results" method="get">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                        placeholder="Search">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" name="table-btn-search" class="btn btn-default">
                                             <i class="fas fa-search"></i>
@@ -87,34 +86,27 @@ require('../../app/Services/buku.php');
                                 $no = 1;
                                 while ($book = mysqli_fetch_array($sql)) {
                                 ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $book['judul']; ?></td>
-                                    <td><?php echo $book['pengarang']; ?></td>
-                                    <td><?php echo $book['genre']; ?></td>
-                                    <td class="col-2">
-                                        <div class="description-container">
-                                            <span
-                                                class="short-description"><?php echo substr($book['deskripsi'], 0, 10); ?>...</span>
-                                            <span
-                                                class="full-description hidden-content"><?php echo $book['deskripsi']; ?></span>
-                                            <button class="read-more-btn">More</button>
-                                        </div>
-                                    </td>
-                                    <td><img src="../../dist/uploads/<?php echo $book['cover']; ?>" alt="gambar"
-                                            style="width: 100px;"></td>
-                                    <td class="d-flex">
-                                        <a type="submit" name="editBuku" class="btn text-info"
-                                            href="tambahBuku.php?editId=<?= $book['id'] ?>"><i
-                                                class="fas fa-edit"></i></a>
-                                        <form method="post" action="../../app/Services/buku.php?id=<?= $book['id']; ?>">
-                                            <!-- <button type="submit" name="editBuku" class="btn text-info"><i class="fas fa-edit"></i></button> -->
-                                            <button onclick="return confirm('Yakin Menghapus Data Ini?')" type="submit"
-                                                name="deleteBuku" class="btn text-danger"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $book['judul']; ?></td>
+                                        <td><?php echo $book['pengarang']; ?></td>
+                                        <td><?php echo $book['genre']; ?></td>
+                                        <td class="col-2">
+                                            <div class="description-container">
+                                                <span class="short-description"><?php echo substr($book['deskripsi'], 0, 10); ?>...</span>
+                                                <span class="full-description hidden-content"><?php echo $book['deskripsi']; ?></span>
+                                                <button class="read-more-btn">More</button>
+                                            </div>
+                                        </td>
+                                        <td><img src="../../dist/uploads/<?php echo $book['cover']; ?>" alt="gambar" style="width: 100px;"></td>
+                                        <td class="d-flex">
+                                            <a type="submit" name="editBuku" class="btn text-info" href="tambahBuku.php?editId=<?= $book['id'] ?>"><i class="fas fa-edit"></i></a>
+                                            <form method="post" action="../../app/Services/buku.php?id=<?= $book['id']; ?>">
+                                                <!-- <button type="submit" name="editBuku" class="btn text-info"><i class="fas fa-edit"></i></button> -->
+                                                <button onclick="return confirm('Yakin Menghapus Data Ini?')" type="submit" name="deleteBuku" class="btn text-danger"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 <?php
                                     $no++;
                                 } ?>
@@ -140,17 +132,17 @@ require('../../app/Services/buku.php');
     <?php include('../partials/scripts.php') ?>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        $(".read-more-btn").click(function() {
-            var container = $(this).parent();
-            container.find(".short-description, .full-description").toggleClass("hidden-content");
+        document.addEventListener("DOMContentLoaded", function() {
+            $(".read-more-btn").click(function() {
+                var container = $(this).parent();
+                container.find(".short-description, .full-description").toggleClass("hidden-content");
 
-            if (container.find(".short-description").hasClass("hidden-content")) {
-                $(this).text("Less");
-            } else {
-                $(this).text("More");
+                if (container.find(".short-description").hasClass("hidden-content")) {
+                    $(this).text("Less");
+                } else {
+                    $(this).text("More");
 
-            }
+                }
+            });
         });
-    });
     </script>

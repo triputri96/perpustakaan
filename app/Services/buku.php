@@ -22,7 +22,6 @@ if (isset($_GET['editId'])) {
     return $buku;
   }
 }
-
 if (isset($_POST['tambahBuku'])) {
   session_start();
   if (!empty($_POST['judul'])) {
@@ -37,8 +36,11 @@ if (isset($_POST['tambahBuku'])) {
   if (!empty($_POST['deskripsi'])) {
     $_SESSION['deskripsi'] = $_POST['deskripsi'];
   }
-  if (!empty($_FILES['coverImg'])) {
-    $_SESSION['coverImg'] = $_FILES['coverImg'];
+  if (isset($_GET['editId']) && empty($_FILES['coverImg']['name'])) {
+    $_SESSION['coverImg']['name'] = ''; // Set an empty value for cover image
+    if (isset($buku['cover'])) {
+      $_SESSION['coverImg']['name'] = $buku['cover'];
+    }
   }
 
   // CHECK IS EMPTY OR NOT
@@ -62,8 +64,7 @@ if (isset($_POST['tambahBuku'])) {
     header('location:../../pages/admin/tambahBuku.php?pesan=Deskripsi harus diisi');
     return;
   }
-  if (empty($_FILES['coverImg']['name'])) {
-    $_SESSION['coverImg']['name'] = $_FILES['coverImg']['name'];
+  if (empty($_FILES['coverImg']['name']) && empty($_POST['currentCover'])) {
     header('location:../../pages/admin/tambahBuku.php?pesan=Cover buku harus diisi');
     return;
   }

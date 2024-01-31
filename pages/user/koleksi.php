@@ -19,16 +19,19 @@
                                         href="../user/index.php#home">Home</a>
                                 </li>
                                 <li class="nav-item col">
+                                    <a class="nav-link" aria-current="page" href="../user/index.php#book">Buku</a>
+                                </li>
+                                <li class="nav-item col">
                                     <a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
                                 </li>
                                 <?php
-                // check identitas user logged in
-                $username = $_SESSION['username'];
-                $qlog = mysqli_query($konek, "SELECT id, level FROM data_user WHERE username='$username'");
-                $logged = mysqli_fetch_array($qlog);
-                $user_id = $logged['id'];
-                if ($logged['level'] == 'admin') :
-                ?>
+                                // check identitas user logged in
+                                $username = $_SESSION['username'];
+                                $qlog = mysqli_query($konek, "SELECT id, level FROM data_user WHERE username='$username'");
+                                $logged = mysqli_fetch_array($qlog);
+                                $user_id = $logged['id'];
+                                if ($logged['level'] == 'admin') :
+                                ?>
                                 <li class="nav-item col">
                                     <a class="nav-link color-black" href="../admin/dashboard.php">Dashboard</a>
                                 </li>
@@ -69,32 +72,32 @@
                             </thead>
                             <tbody>
                                 <?php
-                $username = $_SESSION['username'];
-                $query = "SELECT data_peminjaman.id, data_peminjaman.is_returned, data_peminjaman.tgl_pinjam, data_peminjaman.tgl_kembali, data_buku.judul
+                                $username = $_SESSION['username'];
+                                $query = "SELECT data_peminjaman.id, data_peminjaman.is_returned, data_peminjaman.tgl_pinjam, data_peminjaman.tgl_kembali, data_buku.judul
                   FROM data_peminjaman 
                   INNER JOIN data_buku 
                   ON data_peminjaman.buku_id = data_buku.id
                   WHERE data_peminjaman.user_id = (SELECT id FROM data_user WHERE username = '$username')";
-                // INNER JOIN data_user
-                // ON data_peminjaman.user_id = data_user.id";
-                $sql = mysqli_query($konek, $query);
-                $no = 1;
-                while ($pinjam = mysqli_fetch_array($sql)) {
-                ?>
+                                // INNER JOIN data_user
+                                // ON data_peminjaman.user_id = data_user.id";
+                                $sql = mysqli_query($konek, $query);
+                                $no = 1;
+                                while ($pinjam = mysqli_fetch_array($sql)) {
+                                ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $pinjam['judul']; ?></td>
                                     <td><?php echo $pinjam['tgl_pinjam']; ?></td>
                                     <td><?php if (is_null($pinjam['tgl_kembali'])) {
-                          echo "-";
-                        } else {
-                          echo $pinjam['tgl_kembali'];
-                        }; ?></td>
+                                                echo "-";
+                                            } else {
+                                                echo $pinjam['tgl_kembali'];
+                                            }; ?></td>
                                     <td><?php if ($pinjam['is_returned'] == 1) {
-                          echo 'Dikembalikan';
-                        } else {
-                          echo 'Belum dikembalikan';
-                        } ?></td>
+                                                echo 'Dikembalikan';
+                                            } else {
+                                                echo 'Belum dikembalikan';
+                                            } ?></td>
                                     <td>
                                         <form method="post"
                                             action="../../app/Services/userDashboard.php?idPeminjaman=<?= $pinjam['id']; ?>">
@@ -105,9 +108,9 @@
                                     </td>
                                 </tr>
                                 <?php
-                  $no++;
-                }
-                ?>
+                                    $no++;
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

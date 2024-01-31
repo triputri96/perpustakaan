@@ -19,6 +19,9 @@ require('../../app/Services/userDashboard.php');
                                     <a class="nav-link active" aria-current="page" href="#home">Home</a>
                                 </li>
                                 <li class="nav-item col">
+                                    <a class="nav-link" aria-current="page" href="#book">Buku</a>
+                                </li>
+                                <li class="nav-item col">
                                     <a class="nav-link color-black" href="koleksi.php">Koleksiku</a>
                                 </li>
                                 <?php

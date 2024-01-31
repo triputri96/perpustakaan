@@ -88,6 +88,12 @@ require('../../app/Services/buku.php');
                                                                                                           } ?>">
                     </div>
                     <div class="form-group">
+                      <?php if (!is_null($buku) && isset($buku['cover'])) : ?>
+                        <input type="hidden" name="currentCover" value="<?php echo $buku['cover']; ?>">
+                      <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
                       <label for="cover">Cover</label>
                       <input type="file" name="coverImg" class="form-control" id="cover" value="">
                     </div>
